@@ -85,8 +85,8 @@ dimswitch.c
 #include <wiringPi.h>
 #include <stdio.h>
 
-#define SW  2      /* GPIO24 */
-#define LED 1      /* GPIO18 */
+#define SW  2      /* GPIO 13 */
+#define LED 1      /* GPIO 12 */
 
 int switchControl()
 {
@@ -96,9 +96,10 @@ int switchControl()
    pinMode(LED, PWM_OUTPUT);                   /* Pin 모드를 PWM_OUTPUT으로 설정 */
 
    while(1) {
-      if(digitalRead(SW) == LOW) {          /* Push 버튼이 눌러지면(LOW) */
+      if(digitalRead(SW) == HIGH) {          /* Push 버튼이 눌러지면(LOW) */
          pwmWrite(LED, cnt*100);                /* LED 밝기 변화 */
          cnt += cnt;                        /* cnt 값 증가 */
+	 delay(1000);
       }
    };
 
